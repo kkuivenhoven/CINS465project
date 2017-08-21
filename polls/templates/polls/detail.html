@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load staticfiles %}
+
+<h1>{{ question.question_text }}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<!-- set the forms action to polls:vote with the question id and set the method as post -->
+<form action="{% url 'polls:vote' question.id %}" method="post">
+	<!-- takes care of the Cross Site Request Forgeries -->
+	{% csrf_token %}
+	{% for choice in question.choice_set.all %}
+	<!-- value of each radio button is the question id so that's what's sent in the POST data 
+	forloop.counter indicates the number of times for tag has gone through its loop -->
+				<input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
+				<label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
+	{% endfor %}
+	<input type="submit" value="Vote" />
+</form>
+
+
+<a href="{% url 'polls:index' %}">Return to Polls</a><br>
+
+
+<!--ul>
+% for choice in question.choice_set.all %}
+	<li>{ choice.choice_text }}</li>
+% endfor %}
+</ul-->
+
+{% endblock content %}

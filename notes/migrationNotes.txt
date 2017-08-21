@@ -1,0 +1,8 @@
+3 step guide for making model changes:
+	1. In models.py, change your models
+	2. To create migrations for those changes, run 'python manage.py makemigrations;
+	3. To apply the changes to the DB, run 'python manage.py migrate'
+	-- source: https://docs.djangoproject.com/en/1.11/intro/tutorial02/ --
+
+1 step guide to seeing DB tables with relationships:
+	1. Run the command "python manage.py graph_models -a -o myapp_models.png"
